@@ -3,6 +3,7 @@
 #include <WiFiAP.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
+#include "my_inmp441.h"
 
 // 1. Replace with your network credentials
 const char* ssid = "Redmi Note 12 Turbo";   // 若用手机热点，需要调整为2.4G频段
@@ -15,17 +16,19 @@ const char* doubao_api_key = "b1c9428f-5f56-43e3-bd18-19050e53c221";
 String inputText = "你好，深度求索！";
 String apiUrl = "https://ark.cn-beijing.volces.com/api/v3/chat/completions";
 String answer;
+My_INMP441 my_inmp441;
 // put function declarations here:
 String getGPTAnswer(String);
 
 void setup() {
   // Initialize Serial
   Serial.begin(115200);
+  my_inmp441.Init();
 
   // Connect to Wi-Fi network
   WiFi.mode(WIFI_STA);
   WiFi.begin(ssid, password);
-  Serial.print("Connecting to WiFi ..");
+  //Serial.print("Connecting to WiFi ..");
   while (WiFi.status() != WL_CONNECTED) {
     Serial.print('.');
     delay(1000);
@@ -37,7 +40,9 @@ void setup() {
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  my_inmp441.Read();
+  delay(100);
+  /*
   if (Serial.available()) {
     inputText = Serial.readStringUntil('\r');//  \r表示结束符为回车符
     // inputText.trim();
@@ -47,7 +52,7 @@ void loop() {
     Serial.println("Answer: " + answer);
     Serial.println("Enter a prompt:");
   }
-  // delay(2);
+  */
 }
 
 // put function definitions here:
