@@ -10,7 +10,7 @@
 #define bufferlen 64        // 缓冲区长度
 
 #define INMP441_WS 15       //字时钟WS
-#define INMP441_BCK 2      //位时钟BCLK
+#define INMP441_BCK 2       //位时钟BCLK
 #define INMP441_SD 13       //串行数据SD
 
 const i2s_port_t I2S_PORT = I2S_NUM_0;      // I2S外设端口号0
